@@ -98,4 +98,4 @@ flutter_native_splash:
   ios : false
   web : false
   color : '#94B79D'
-  image : 'assets/images/image.png'
+  image : 'assets/images/temp_logo.png'
