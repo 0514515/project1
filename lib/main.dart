@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login/login_page.dart';
+import 'package:get/get.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
@@ -7,7 +8,7 @@ void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.remove();
 
-  runApp(const MyApp());
+  runApp(const GetMaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

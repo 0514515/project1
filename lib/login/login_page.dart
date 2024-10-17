@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
           passwordTextField("비밀번호"),
           loginButton("로그인"),
           resistButton("회원가입"),
-          resetPasswordButton("비밀번호 찾기"),
+          resetPasswordButton("비밀번호 재설정"),
         ],
       ),
     );
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {},
       style: TextButton.styleFrom(
           textStyle: const TextStyle(fontSize: 20),
-          fixedSize: const Size(140, 50),
+          fixedSize: const Size(200, 50),
           foregroundColor: buttonTextColor),
       child: Text(buttonText),
     );
