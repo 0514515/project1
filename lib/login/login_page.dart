@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   static const double textFieldSize = 300.0; //로그인 페이지 내의 텍스트 필드 사이즈
   static const double textFieldBottomPaddingSize = 40.0; //텍스트필드 아래 패딩 사이즈
   static const Color buttonTextColor =

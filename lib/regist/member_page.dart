@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 //ViewModel
-class MemberViewModel extends GetxController{
-    var member = MemberModel().obs;
-
-    
+class MemberViewModel extends GetxController {
+  final member = MemberModel().obs;
 }
