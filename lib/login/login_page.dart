@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/login/login_controller.dart';
+import 'package:flutter_application_1/regist/member_page.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
   static const double textFieldSize = 300.0; //로그인 페이지 내의 텍스트 필드 사이즈
   static const double textFieldBottomPaddingSize = 40.0; //텍스트필드 아래 패딩 사이즈
   static const Color buttonTextColor =
       Color.fromARGB(255, 101, 85, 143); //버튼속 텍스트 색상
+
+  final LoginController loginController = Get.put(LoginController());
+
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,38 +41,71 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-//TextField 위젯
+// 이메일 TextField 위젯
   Widget loginTextField(String labelText) {
     return Container(
-        width: textFieldSize,
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, textFieldBottomPaddingSize),
-        child: TextFormField(
-          //Validation을 위한 TextFormField 사용
+      width: textFieldSize,
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, textFieldBottomPaddingSize),
+      child: Obx(
+        () => TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          initialValue: labelText,
+          onChanged: (value) {
+            loginController.inputEmail(value);
+            loginController.validateEmailAndSetEmailAlertText();
+          },
           decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: "이메일을 입력해주세요",
-              labelText: labelText,
-              floatingLabelBehavior:
-                  FloatingLabelBehavior.always //라벨텍스트를 항상 보이게
-              ),
-        ));
+            labelText: labelText,
+            hintText: "이메일을 입력해주세요",
+            border: const OutlineInputBorder(
+                borderSide: BorderSide(color: buttonTextColor)),
+            focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: buttonTextColor)),
+            enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: buttonTextColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red)),
+            errorText: loginController.emailAlertText.value.isNotEmpty
+                ? loginController.emailAlertText.value
+                : null,
+            floatingLabelBehavior: FloatingLabelBehavior.always, //라벨텍스트를 항상 보이게
+          ),
+        ),
+      ),
+    );
   }
 
 //비밀번호 TextField 위젯
   Widget passwordTextField(String labelText) {
     return Container(
-        width: textFieldSize,
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, textFieldBottomPaddingSize),
-        child: TextFormField(
-          obscureText: true, //입력 텍스트를 모두 .으로 표기
+      width: textFieldSize,
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, textFieldBottomPaddingSize),
+      child: Obx(
+        () => TextFormField(
+          obscureText: true, //비밀번호 텍스트 o로 변환해서 보여줌
+          onChanged: (value) {
+            loginController.inputPassword(value);
+            loginController.validateEmailAndSetPasswordAlertText();
+          },
           decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: "비밀번호를 입력해주세요",
-              labelText: labelText,
-              floatingLabelBehavior:
-                  FloatingLabelBehavior.always //라벨텍스트를 항상 보이게
-              ),
-        ));
+            labelText: labelText,
+            hintText: "비밀번호를 입력해주세요",
+            border: const OutlineInputBorder(
+                borderSide: BorderSide(color: buttonTextColor)),
+            focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: buttonTextColor)),
+            enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: buttonTextColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red)),
+            errorText: loginController.passwordAlertText.value.isNotEmpty
+                ? loginController.passwordAlertText.value
+                : null,
+            floatingLabelBehavior: FloatingLabelBehavior.always, //라벨텍스트를 항상 보이게
+          ),
+        ),
+      ),
+    );
   }
 
   //로그인 ElevatedButton 위젯
@@ -91,7 +129,9 @@ class LoginPage extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(const MemberRegistPage());
+          },
           style: ElevatedButton.styleFrom(
               textStyle: const TextStyle(fontSize: 20),
               fixedSize: const Size(textFieldSize, 50),
